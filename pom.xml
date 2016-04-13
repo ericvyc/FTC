@@ -24,7 +24,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.7.1</version>
+				<version>2.4.3</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -39,7 +39,7 @@
 					<transformers>
 						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>br.fumec.ftc.Arquivo</mainClass>
+							<mainClass>br.fumec.ftc.Main</mainClass>
 						</transformer>
 					</transformers>
 				</configuration>
@@ -57,14 +57,14 @@
 						</goals>
 						<configuration>
 							<headerType>gui</headerType>
-							<jar>${project.build.directory}/${artifactId}-${version}-shaded.jar</jar>
-							<outfile>${project.build.directory}/hasCode.exe</outfile>
+							<jar>${project.build.directory}/${project.artifactId}.jar</jar>
+							<outfile>${project.build.directory}/ftc.exe</outfile>
 							<downloadUrl>http://java.com/download</downloadUrl>
 							<classPath>
-								<mainClass>br.fumec.ftc.Arquivo</mainClass>
+								<mainClass>br.fumec.ftc.Main</mainClass>
 								<preCp>anything</preCp>
 							</classPath>
-							<icon>src/main/resources/icon/list.png</icon>
+							<icon>src/main/resources/icon/list.ico</icon>
 							<jre>
 								<minVersion>1.8.0</minVersion>
 								<jdkPreference>preferJre</jdkPreference>
@@ -74,12 +74,12 @@
 								<txtFileVersion>${project.version}</txtFileVersion>
 								<fileDescription>${project.name}</fileDescription>
 								<copyright>2016 FTC - FUMEC - 5NA</copyright>
-								<productVersion>1.0.0</productVersion>
-								<txtProductVersion>1.0.0</txtProductVersion>
+								<productVersion>1.0.0.0</productVersion>
+								<txtProductVersion>1.0.0.0</txtProductVersion>
 								<productName>${project.name}</productName>
 								<companyName>ftc.fumec.br</companyName>
 								<internalName>5NA</internalName>
-								<originalFilename>FTC.exe</originalFilename>
+								<originalFilename>ftc.exe</originalFilename>
 							</versionInfo>
 						</configuration>
 					</execution>
@@ -88,4 +88,5 @@
 		</plugins>
 	</build>
 
+	<description>Projeto auto instrucional para a matéria de FTC da turma 5NA.</description>
 </project>
