@@ -9,6 +9,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Arquivo extends JFrame {
 	public Arquivo() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Auto Instrucional");
 
