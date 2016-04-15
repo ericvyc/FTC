@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,14 +24,6 @@ public class Arquivo extends JFrame {
 		setTitle("Auto Instrucional");
 
 		JLabel lbl_arquivo = new JLabel("Busque seu arquivo de AFN:");
-		JFileChooser selectArquivo = new JFileChooser();
-		selectArquivo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				txt_nome_arquivo.setText(selectArquivo.getSelectedFile().getAbsolutePath());
-			}
-		});
-		
-		JLabel lbl_nome_arquivo = new JLabel("Seu arquivo:");
 		
 		txt_nome_arquivo = new JTextField();
 		txt_nome_arquivo.setEditable(false);
@@ -39,6 +32,8 @@ public class Arquivo extends JFrame {
 		JButton btn_avancar = new JButton("Avançar");
 		btn_avancar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(!txt_nome_arquivo.getText().equals("")) {
 				
 				try {
 					
@@ -52,11 +47,28 @@ public class Arquivo extends JFrame {
 					}
 					
 				} catch (FileNotFoundException e1) {
-					JOptionPane.showMessageDialog(null, "Arquivo não encontrado");
+					JOptionPane.showMessageDialog(getContentPane() , "Arquivo não encontrado");
 				} catch (IOException e2){
-					JOptionPane.showMessageDialog(null, "Não foi possível ler o arquivo");
+					JOptionPane.showMessageDialog(getContentPane(), "Não foi possível ler o arquivo");
 				}
 				
+			}
+				
+			}
+		});
+		
+		JButton btn_arquivo = new JButton("Abrir arquivo");
+		btn_arquivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 JFileChooser fc = new JFileChooser();
+                 int res = fc.showOpenDialog(getContentPane());
+                 
+                 if(res == JFileChooser.APPROVE_OPTION){
+                     File arquivo = fc.getSelectedFile();  
+                     txt_nome_arquivo.setText(arquivo.getAbsolutePath());
+                 }
+                 
 			}
 		});
 		
@@ -64,36 +76,28 @@ public class Arquivo extends JFrame {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(22)
-							.addComponent(lbl_arquivo)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(selectArquivo, GroupLayout.PREFERRED_SIZE, 494, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(58)
-							.addComponent(lbl_nome_arquivo)
-							.addGap(31)
-							.addComponent(txt_nome_arquivo, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
-							.addGap(44)
-							.addComponent(btn_avancar)))
-					.addContainerGap(123, Short.MAX_VALUE))
+					.addGap(24)
+					.addComponent(lbl_arquivo)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txt_nome_arquivo, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addComponent(btn_arquivo)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btn_avancar)
+					.addGap(51))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(51)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(selectArquivo, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbl_arquivo))
-					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+					.addGap(102)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_nome_arquivo)
+						.addComponent(lbl_arquivo)
 						.addComponent(txt_nome_arquivo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_avancar))
-					.addGap(59))
+						.addComponent(btn_avancar)
+						.addComponent(btn_arquivo))
+					.addContainerGap(170, Short.MAX_VALUE))
 		);
-		this.setSize(800, 500);
+		this.setSize(800, 324);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(groupLayout);
 	}
